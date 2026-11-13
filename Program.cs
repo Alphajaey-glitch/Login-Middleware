@@ -1,3 +1,5 @@
+using LoggingUsingMiddleware.CustomMiddleware;
+
 namespace LoggingUsingMiddleware
 {
     public class Program
@@ -7,7 +9,14 @@ namespace LoggingUsingMiddleware
             var builder = WebApplication.CreateBuilder(args);
             var app = builder.Build();
 
-            
+            app.UseLoginMiddleware();
+
+            app.Run(async httpContext =>
+            {
+
+                await httpContext.Response.WriteAsync("No response");
+
+            });
 
             app.Run();
         }
